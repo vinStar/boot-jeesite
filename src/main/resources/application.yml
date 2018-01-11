@@ -1,0 +1,100 @@
+server:
+  port: 8081
+  contextPath: /boot
+  tomcat:
+    uri-encoding: UTF-8
+    basedir: ../jeesite/tomcat
+    max-threads: 2000
+    min-spare-threads: 10
+    accesslog:
+      pattern: common
+      enabled: true
+      directory: ../logs
+      prefix: jeesite_access_log
+      suffix: .log
+      request-attributes-enabled: true
+      rename-on-rotate: true
+logging:
+  level:
+    root: INFO
+    com.thinkgem.jeesite: INFO
+    org.apache.shiro.cache.ehcache.EhCacheManager: WARN
+spring:
+  #数据库的配置
+  datasource:
+        name: test
+        url: jdbc:mysql://192.168.1.15:3306/jeesite?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: Aa123456
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 'x' FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+  #redis配置
+  redis: 
+     database: 0
+     host: 127.0.0.1
+     port: 6379
+     timeout: 0
+     pool: 
+       maxIdle: 300
+       maxTotal: 60000
+       testOnBorrow: true
+#springMvc的配置
+  mvc:
+     view:
+       prefix: /WEB-INF/views/
+       suffix: .jsp
+       index: /a/login
+     servlet:
+       load-on-startup: 1
+#spring-ehcache的配置
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+  freemarker:
+    #模板加载的位置
+     template-loader-path: classpath:/templates
+#mybatis的配置
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+  mapper-locations: classpath:/mappings/**/*.xml
+  type-aliases-package: com.thinkgem.jeesite
+#分页配置
+page:
+  pageSize: 10
+#文件上传的路径
+userfiles:
+  basedir: ../jeesite/upload
+
+#会话过期时间
+session.sessionTimeout: 1800000
+session.sessionTimeoutClean: 120000
+session.simpleCookie: thinkgem.jeesite.session.id
+
+#admin页面管理Path
+adminPath: /a
+
+#前端基础路径
+frontPath: /f
+
+#前端URL后缀
+urlSuffix: .html
+
+#工程路径，在代码生成时获取不到工程路径时，可再此指定绝对路径。
+projectPath: /Users/vin/DevDemo/jeesite
+
+
