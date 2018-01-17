@@ -2,81 +2,82 @@ package com.thinkgem.jeesite.test;
 
 public class CommonEnum {
 
-	public enum EnumTest {
-		MON, TUE, WED, THU, FRI, SAT, SUN;
-	}
+    public enum EnumTest {
+        MON, TUE, WED, THU, FRI, SAT, SUN;
+    }
 
-	public enum DataNum {
-		// A=65
-		A(65),
-		// B=66
-		B(6);
-		private DataNum(Integer value) {
-			this.value = value;
-		}
+    public enum DataNum {
+        // A=65
+        A(65),
+        // B=66
+        B(6);
 
-		private Integer value;
+        private DataNum(Integer value) {
+            this.value = value;
+        }
 
-		public Integer getValue() {
-			return value;
-		}
+        private Integer value;
 
-		public void setValue(Integer value) {
-			this.value = value;
-		}
-	}
+        public Integer getValue() {
+            return value;
+        }
 
-	public enum DataSourceType {
+        public void setValue(Integer value) {
+            this.value = value;
+        }
+    }
 
-		// 主库
-		Master("masterA"),
+    public enum DataSourceType {
 
-		// 从库
-		Slave("slave");
+        // 主库
+        Master("masterA"),
 
-		private DataSourceType(String name) {
-			this.name = name;
-		}
+        // 从库
+        Slave("slave");
 
-		private String name;
+        private DataSourceType(String name) {
+            this.name = name;
+        }
 
-		public String getName() {
-			return name;
-		}
+        private String name;
 
-		public void setName(String name) {
-			this.name = name;
-		}
-	}
+        public String getName() {
+            return name;
+        }
 
-	public enum FileType {
-		VIDEO(1,"视频");
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 
-		int value;
-		String name;
+    public enum FileType {
+        VIDEO(1, "视频");
 
-		FileType(int value,String name){
-			this.value = value;
-			this.name = name;
-		}
+        int value;
+        String name;
 
-		public int getValue() {
-			return value;
-		}
+        FileType(int value, String name) {
+            this.value = value;
+            this.name = name;
+        }
 
-		public String getName() {
-			return name;
-		}
+        public int getValue() {
+            return value;
+        }
 
-		public FileType getByValue(int value){
-			for (FileType fileType : FileType.values()) {
-				if(fileType.value == value){
-					return fileType;
-				}
-			}
-			throw new IllegalArgumentException("No element matches " + value);
-		}
+        public String getName() {
+            return name;
+        }
 
-	}
+        public FileType getByValue(int value) {
+            for (FileType fileType : FileType.values()) {
+                if (fileType.value == value) {
+                    return fileType;
+                }
+            }
+            throw new IllegalArgumentException("No element matches " + value);
+        }
+
+    }
 
 }
