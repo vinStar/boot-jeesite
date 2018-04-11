@@ -18,7 +18,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @date	2017-11-18
  * @version 1.0
  */
-@Component
+@Configuration
 @AutoConfigureAfter(RedisPoolConfig.class)
 public class RedisConfiguration {
 	

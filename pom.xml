@@ -5,7 +5,7 @@
     <groupId>com.thinkgem</groupId>
     <artifactId>boot-jeesite</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>boot-jeesite</name>
     <url>http://maven.apache.org</url>
@@ -13,16 +13,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <version>1.5.6.RELEASE</version>
     </parent>
     <properties>
         <!-- main version setting -->
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
         <druid.version>1.0.18</druid.version>
-        <ehcache.version>2.6.11</ehcache.version>
+        <ehcache.version>2.6.9</ehcache.version>
         <ehcache-web.version>2.0.4</ehcache-web.version>
-        <shiro.version>1.4.0-RC2</shiro.version>
+        <shiro.version>1.2.3</shiro.version>
         <sitemesh.version>2.4.2</sitemesh.version>
 
         <!-- tools version setting -->
@@ -54,7 +54,7 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
         <repository>
-            <id>central</id>
+            <id>public</id>
             <name>Maven Repository Switchboard</name>
             <layout>default</layout>
             <url>http://repo1.maven.org/maven2</url>
@@ -62,22 +62,17 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <!-- Restlet仓库 -->
-        <repository>
-            <id>maven-restlet</id>
-            <name>Public online Restlet repository</name>
-            <url>http://maven.restlet.org</url>
-        </repository>
+
     </repositories>
 
     <!-- 设定插件仓库 -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jeesite-repos</id>
-            <name>Jeesite Repository</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+    <!--<id>jeesite-repos</id>-->
+    <!--<name>Jeesite Repository</name>-->
+    <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
+    <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -226,12 +221,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>2.2</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -324,15 +319,13 @@
             <version>2.3</version>
 
         </dependency>
-        <!--
+
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
-            <version>11.2.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ojdbc6-11.2.2.jar</systemPath>
+            <version>11.2.0.3</version>
         </dependency>
-        -->
+
     </dependencies>
     <build>
         <plugins>

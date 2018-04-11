@@ -2,7 +2,7 @@
 <!DOCTYPE ehcache>
 <ehcache updateCheck="false" name="defaultCache">
 
-	<diskStore path="../jeesite/ehcache" />
+	<diskStore path="../boot-jeesite/ehcache" />
 
 	<!-- 默认缓存配置. 自动失效：最后一次访问时间间隔300秒失效，若没有访问过自创建时间600秒失效。-->
 	<defaultCache maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"

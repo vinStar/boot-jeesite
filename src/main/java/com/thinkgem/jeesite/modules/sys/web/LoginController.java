@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.sys.web;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +44,24 @@ public class LoginController extends BaseController {
     private SessionDAO sessionDAO;
 
     /**
+     * 登录
+     *
+     * @return
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "redirect:" + adminPath + "/login";
+    }
+
+    /**
      * 管理登录
      */
     @RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("login, a/login===GET");
+        }
+
         Principal principal = UserUtils.getPrincipal();
 
         // 默认页签模式
@@ -58,8 +73,13 @@ public class LoginController extends BaseController {
             logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
         }
         // 如果已经登录，则跳转到管理首页
-        if (principal != null && !principal.isMobileLogin())
+        if (principal != null && !principal.isMobileLogin()) {
             return "redirect:" + adminPath;
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("is it continues?");
+        }
         return "modules/sys/sysLogin";
     }
 
@@ -68,6 +88,10 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
     public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("login, a/login===POST");
+        }
+
         Principal principal = UserUtils.getPrincipal();
 
         // 如果已经登录，则跳转到管理首页
@@ -118,6 +142,10 @@ public class LoginController extends BaseController {
     @RequiresPermissions("user")
     @RequestMapping(value = "${adminPath}")
     public String index(HttpServletRequest request, HttpServletResponse response) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("/a====");
+        }
+
         Principal principal = UserUtils.getPrincipal();
 
         // 登录成功后，验证码计算器清零

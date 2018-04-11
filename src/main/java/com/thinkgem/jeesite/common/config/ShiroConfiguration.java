@@ -35,12 +35,12 @@ import java.util.Map;
  * Shrio配置类
  * <p>Title: ShiroConfiguration</p>
  * <p>Description: </p>
- * @author	OAO
- * @date	2017-11-09
+ *
+ * @author OAO
  * @version 1.0
+ * @date 2017-11-09
  */
-
-@Component
+@Configuration
 public class ShiroConfiguration {
 
     /**
@@ -51,37 +51,44 @@ public class ShiroConfiguration {
      * @param adminPath
      * @return
      */
+//     Shiro权限过滤过滤器定义
     @Bean(name = "shiroFilterChainDefinitions")
     public LinkedHashMap<String, String> shiroFilterChainDefinitions(Environment environment, @Value("${adminPath}") String adminPath) {
         Global.resolver = new RelaxedPropertyResolver(environment);
         // 配置访问权限
         LinkedHashMap<String, String> linkedHashMap = Maps.newLinkedHashMap();
+        linkedHashMap.put("/sso/**", "anon");
         linkedHashMap.put("/static/**", "anon");
+        linkedHashMap.put("/Scripts/**", "anon");
         linkedHashMap.put("/userfiles/**", "anon");
-        linkedHashMap.put(adminPath + "/login", "authc");
+//        linkedHashMap.put(adminPath + "/cas", "cas");
+        linkedHashMap.put(adminPath + "/login", "anon");
         linkedHashMap.put(adminPath + "/logout", "logout");
+        linkedHashMap.put("modules/sys/sysLogin", "anon");
+//        linkedHashMap.put("/a/login", "anon");
         linkedHashMap.put(adminPath + "/**", "user");
-        linkedHashMap.put("/act/editor/**", "user");
-        linkedHashMap.put("/ReportServer/**", "user");
+//        linkedHashMap.put("/act/editor/**", "user");
+//        linkedHashMap.put("/ReportServer/**", "user");
         return linkedHashMap;
     }
 
-    @Bean(name = "basicHttpAuthenticationFilter")
-    public BasicHttpAuthenticationFilter casFilter(@Value("${adminPath}") String adminPath) {
-        BasicHttpAuthenticationFilter basicHttpAuthenticationFilter = new BasicHttpAuthenticationFilter();
-        basicHttpAuthenticationFilter.setLoginUrl(adminPath + "/login");
-        return basicHttpAuthenticationFilter;
-    }
+//    @Bean(name = "basicHttpAuthenticationFilter")
+//    public BasicHttpAuthenticationFilter casFilter(@Value("${adminPath}") String adminPath) {
+//        BasicHttpAuthenticationFilter basicHttpAuthenticationFilter = new BasicHttpAuthenticationFilter();
+//        basicHttpAuthenticationFilter.setLoginUrl(adminPath + "/login");
+//        return basicHttpAuthenticationFilter;
+//    }
 
+    //    安全认证过滤器
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(
             @Value("${adminPath:/a}") String adminPath,
-            BasicHttpAuthenticationFilter basicHttpAuthenticationFilter,
+//            BasicHttpAuthenticationFilter basicHttpAuthenticationFilter,
             FormAuthenticationFilter formAuthenticationFilter,
             DefaultWebSecurityManager securityManager,
             @Qualifier("shiroFilterChainDefinitions") LinkedHashMap<String, String> shiroFilterChainDefinitions) {
         Map<String, Filter> filters = new HashMap<>();
-        filters.put("basic", basicHttpAuthenticationFilter);
+//        filters.put("basic", basicHttpAuthenticationFilter);
         filters.put("authc", formAuthenticationFilter);
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setFilters(filters);
@@ -99,12 +106,13 @@ public class ShiroConfiguration {
         return ehCacheManager;
     }
 
+    //    自定义会话管理配置
     @Bean(name = "sessionManager")
     public SessionManager sessionManager(
-    		CacheSessionDAO dao, 
-    		@Value("${session.sessionTimeout}") Long sessionTimeout, 
-    		@Value("${session.sessionTimeoutClean}") Long sessionValidationInterval, 
-    		@Value("${session.simpleCookie}") String simpleCookie) {
+            CacheSessionDAO dao,
+            @Value("${session.sessionTimeout}") Long sessionTimeout,
+            @Value("${session.sessionTimeoutClean}") Long sessionValidationInterval,
+            @Value("${session.simpleCookie}") String simpleCookie) {
         SessionManager sessionManager = new SessionManager();
         sessionManager.setSessionDAO(dao);
         sessionManager.setGlobalSessionTimeout(sessionTimeout);
@@ -115,6 +123,7 @@ public class ShiroConfiguration {
         return sessionManager;
     }
 
+    //    定义Shiro安全管理配置
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(
             SystemAuthorizingRealm systemAuthorizingRealm,
@@ -145,11 +154,13 @@ public class ShiroConfiguration {
         return filterRegistration;
     }
 
+    //    保证实现了Shiro内部lifecycle函数的bean执行
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
+    //    AOP式方法级权限检查
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {

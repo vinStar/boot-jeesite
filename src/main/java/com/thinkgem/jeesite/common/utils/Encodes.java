@@ -116,7 +116,9 @@ public class Encodes {
 	 * Xml 转码.
 	 */
 	public static String escapeXml(String xml) {
-		return StringEscapeUtils.escapeXml10(xml);
+
+		return StringEscapeUtils.escapeXml10(xml);//commons-lang3 > 3.2.1
+		//return StringEscapeUtils.escapeXml(xml);
 	}
 
 	/**

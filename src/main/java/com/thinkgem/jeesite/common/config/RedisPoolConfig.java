@@ -3,6 +3,7 @@ package com.thinkgem.jeesite.common.config;
 import java.io.Serializable;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @date	2017-11-18
  * @version 1.0
  */
-@Component
+@Configuration
 @ConfigurationProperties(prefix = "spring.redis.pool")
 public class RedisPoolConfig implements Serializable {
 

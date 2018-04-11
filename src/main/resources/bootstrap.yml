@@ -6,7 +6,7 @@ spring:
 #产品信息设置
 productName: sprintboot-jeesite-平台
 #产品版本
-version: thinkgem-jeesite-1.0
+version: thinkgem-jejingesite-1.0
 #静态文件后缀
 web:
   staticFile: .css,.js,.png,.jpg,.gif,.jpeg,.bmp,.ico,.swf,.psd,.htc,.htm,.html,.crx,.xpi,.exe,.ipa,.apk

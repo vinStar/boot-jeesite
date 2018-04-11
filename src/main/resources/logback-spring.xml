@@ -11,15 +11,15 @@
 		</encoder>
 		<!-- deny all events with a level below DEBUG, that is TRACE  -->
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>DEBUG</level>
+			<level>debug</level>
 		</filter>
 	</appender>
 	
 	<appender name="sysDailyRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>../jeesite/logs/sys.log</file>
+		<file>../boot-jeesite/logs/sys.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>../jeesite/logs/sys-%d{yyyyMMdd}.log</fileNamePattern>
+			<fileNamePattern>../boot-jeesite/logs/sys-%d{yyyyMMdd}.log</fileNamePattern>
 			<!-- 保留30天的日志 -->
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -28,15 +28,15 @@
 			<charset>UTF-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>INFO</level>
+			<level>debug</level>
 		</filter>
 	</appender>
 	
 	<appender name="infoDailyRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>../jeesite/logs/jeesite-info.log</file>
+		<file>../boot-jeesite/logs/jeesite-info.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>../jeesite/logs/jy-info-%d{yyyyMMdd}.log</fileNamePattern>
+			<fileNamePattern>../boot-jeesite/logs/jy-info-%d{yyyyMMdd}.log</fileNamePattern>
 			<!-- 保留30天的日志 -->
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -52,10 +52,10 @@
 	</appender>
 	
 	<appender name="severeDailyRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>../jeesite/logs/jeesite-severe.log</file>
+		<file>../boot-jeesite/logs/jeesite-severe.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>../jeesite/logs/jeesite-severe-%d{yyyyMMdd}.log</fileNamePattern>
+			<fileNamePattern>../boot-jeesite/logs/jeesite-severe-%d{yyyyMMdd}.log</fileNamePattern>
 			<!-- 保留30天的日志 -->
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -65,7 +65,7 @@
 		</encoder>
 		<!-- deny all events with a level below WARN, that is TRACE, DEBUG, and INFO -->
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>WARN</level>
+			<level>debug</level>
 		</filter> 
 	</appender>
 	

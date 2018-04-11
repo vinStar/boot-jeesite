@@ -2,6 +2,7 @@ package com.thinkgem.jeesite.common.config;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
@@ -15,7 +16,7 @@ import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
  * @date	2017-11-09
  * @version 1.0
  */
-@Component
+@Configuration
 public class MapperScannerConfiguration {
 
 	/**
