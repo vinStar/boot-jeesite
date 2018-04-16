@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+
+.settings/
+boot-jeesite.iml
+ehcache/
+logs/
+target/
+/.idea/
