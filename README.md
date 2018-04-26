@@ -25,7 +25,9 @@
         
 ## 启动
     - jsp 开发模式（含代码生成， cms），需配置 tomcat 启动，打成 war 包，tomcat 部署。
+        - http://localhost:8087   登录页
     - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。
+        - http://localhost:8087/test/  返回测试api数据
     
 ## 2018-04-11
    
