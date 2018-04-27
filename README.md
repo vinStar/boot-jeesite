@@ -27,8 +27,14 @@
 - jsp 开发模式（含代码生成， cms），需配置 tomcat 启动，打成 war 包，tomcat 部署。   
     - http://localhost:8087   登录页    
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
-    - http://localhost:8087/test/  返回测试api数据   
+    - http://localhost:8087/test/  返回测试api数据
     
+    
+## 2018-04-27  
+
+1.maven plugin 设置 jar 分离 lib 'thin jar'  
+[refer](https://my.oschina.net/xiaozhutefannao/blog/1624092)  
+
 ## 2018-04-11
    
 0. 修改启动后自动访问 '/'( 去除 yml 内 springMVC index 配置项 , 非 sb 项目在 springMVC 配置文件)    
