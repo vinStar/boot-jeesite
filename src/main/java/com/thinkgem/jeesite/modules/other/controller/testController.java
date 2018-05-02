@@ -1,5 +1,6 @@
 package com.thinkgem.jeesite.modules.other.controller;
 
+import com.thinkgem.jeesite.common.datasource.DynamicDataSourceContextHolder;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,19 @@ public class testController {
 //        user.setTestList(testList);
 
 
-
         return systemService.getUser("1");
     }
 
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public User test2() {
 
+        DynamicDataSourceContextHolder.setDateSoureType("db2");
+
+        User user2 = systemService.getUser("2");
+        DynamicDataSourceContextHolder.clearDateSoureType();
+        return user2;
+
+    }
 
 
 }

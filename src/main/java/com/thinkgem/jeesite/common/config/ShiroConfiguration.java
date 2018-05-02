@@ -87,7 +87,7 @@ public class ShiroConfiguration {
             FormAuthenticationFilter formAuthenticationFilter,
             DefaultWebSecurityManager securityManager,
             @Qualifier("shiroFilterChainDefinitions") LinkedHashMap<String, String> shiroFilterChainDefinitions) {
-        Map<String, Filter> filters = new HashMap<>();
+        Map<String, Filter> filters = new HashMap<String, Filter>();
 //        filters.put("basic", basicHttpAuthenticationFilter);
         filters.put("authc", formAuthenticationFilter);
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();

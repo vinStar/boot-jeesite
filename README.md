@@ -29,6 +29,16 @@
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据   
     
+    
+## 2018-05-02
+
+0. 支持多数据源（spring boot+druid+mybatis+多数据源），重点参考2     
+1. 没有采用 aop 切换数据源。人为再 controller 层控制数据源选择。    
+2. 没有采用简单负载，只是针对不同数据源非主从模式，determineCurrentLookupKey 默认 db1 数据源  
+[参考1](http://www.cnblogs.com/yjmyzz/p/spring-boot-integrate-with-mybatis-and-multi-datasource.html)
+  
+[参考2](https://github.com/drtrang/druid-spring-boot)  
+    
 ## 2018-04-11
    
 0. 修改启动后自动访问 '/'( 去除 yml 内 springMVC index 配置项 , 非 sb 项目在 springMVC 配置文件)    
