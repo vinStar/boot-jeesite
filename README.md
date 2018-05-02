@@ -34,13 +34,12 @@
 0. 支持多数据源（spring boot+druid+mybatis+多数据源），重点参考2     
 1. 没有采用 aop 切换数据源。人为再 controller 层控制数据源选择。    
 2. 没有采用简单负载，只是针对不同数据源非主从模式，determineCurrentLookupKey 默认 db1 数据源  
-[参考1](http://www.cnblogs.com/yjmyzz/p/spring-boot-integrate-with-mybatis-and-multi-datasource.html)
-  
+[参考1](http://www.cnblogs.com/yjmyzz/p/spring-boot-integrate-with-mybatis-and-multi-datasource.html)  
 [参考2](https://github.com/drtrang/druid-spring-boot)  
        
        
 ## 2018-04-27  
-
+0.解决打成的 jar 包过大问题，便于后期部署或者 docker 集成  
 1.maven plugin 设置 jar 分离 lib 'thin jar'  
 [refer](https://my.oschina.net/xiaozhutefannao/blog/1624092)  
 
