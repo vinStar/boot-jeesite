@@ -29,6 +29,18 @@
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
     
+    
+## 2018-05-05
+
++ f, 
+1. bean 配置 ehCache 
+2. 修改默认数据库 url 
+3. 添加单元测试
+4. 修复启动单元测试或者 `maven test` shiroCache cacheManger 注入多个
+5. 添加 swagger api 接口文档
+6. 配置类全局跨域
+7. shiro filter 暂无权限限制
+    
 ## 2018-05-02
 
 0. 支持多数据源（spring boot+druid+mybatis+多数据源），重点参考2     
