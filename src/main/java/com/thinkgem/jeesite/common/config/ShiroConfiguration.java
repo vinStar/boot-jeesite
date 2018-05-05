@@ -19,10 +19,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
@@ -65,7 +69,7 @@ public class ShiroConfiguration {
         linkedHashMap.put(adminPath + "/login", "anon");
         linkedHashMap.put(adminPath + "/logout", "logout");
         linkedHashMap.put("modules/sys/sysLogin", "anon");
-//        linkedHashMap.put("/a/login", "anon");
+        linkedHashMap.put("/**", "anon");
         linkedHashMap.put(adminPath + "/**", "user");
 //        linkedHashMap.put("/act/editor/**", "user");
 //        linkedHashMap.put("/ReportServer/**", "user");
@@ -100,7 +104,7 @@ public class ShiroConfiguration {
     }
 
     @Bean(name = "shiroCacheManager")
-    public EhCacheManager shiroCacheManager(CacheManager manager) {
+    public org.apache.shiro.cache.CacheManager shiroCacheManager(CacheManager manager) {
         EhCacheManager ehCacheManager = new EhCacheManager();
         ehCacheManager.setCacheManager(manager);
         return ehCacheManager;

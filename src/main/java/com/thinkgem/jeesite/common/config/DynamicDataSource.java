@@ -34,7 +34,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 //        int i = count.incrementAndGet();
 //        List<String> list = new ArrayList<>(targetDataSources.keySet());
 //        String dataSource = list.get(i % list.size());
-//        String info=">>>>>> 当前数据库: {"+ dataSource +"} <<<<<<";
+//        String info=">>>>>> 当前数 据库: {"+ dataSource +"} <<<<<<";
 //        System.out.println(info);
 //        return dataSource;
         String dataSource = DynamicDataSourceContextHolder.getDateSoureType();

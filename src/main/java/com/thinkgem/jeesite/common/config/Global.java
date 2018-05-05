@@ -26,56 +26,56 @@ import java.util.Map;
  */
 public class Global {
 
-private static Logger logger = LoggerFactory.getLogger(Global.class);
-	
-	static RelaxedPropertyResolver resolver;
+    private static Logger logger = LoggerFactory.getLogger(Global.class);
 
-	/**
-	 * 当前对象实例
-	 */
-	private static Global global = new Global();
+    static RelaxedPropertyResolver resolver;
 
-	/**
-	 * 保存全局属性值
-	 */
-	private static Map<String, String> map = Maps.newHashMap();
+    /**
+     * 当前对象实例
+     */
+    private static Global global = new Global();
 
-	/**
-	 * 属性文件加载对象
-	 */
-	private static PropertiesLoader loader = new PropertiesLoader("bootstrap.yml");
+    /**
+     * 保存全局属性值
+     */
+    private static Map<String, String> map = Maps.newHashMap();
 
-	/**
-	 * 显示/隐藏
-	 */
-	public static final String SHOW = "1";
-	public static final String HIDE = "0";
+    /**
+     * 属性文件加载对象
+     */
+    private static PropertiesLoader loader = new PropertiesLoader("bootstrap.yml");
 
-	/**
-	 * 是/否
-	 */
-	public static final String YES = "1";
-	public static final String NO = "0";
+    /**
+     * 显示/隐藏
+     */
+    public static final String SHOW = "1";
+    public static final String HIDE = "0";
 
-	/**
-	 * 对/错
-	 */
-	public static final String TRUE = "true";
-	public static final String FALSE = "false";
+    /**
+     * 是/否
+     */
+    public static final String YES = "1";
+    public static final String NO = "0";
 
-	/**
-	 * 上传文件基础虚拟路径
-	 */
-	public static final String USERFILES_BASE_URL = "/userfiles/";
+    /**
+     * 对/错
+     */
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
 
-	/**
-	 * 获取当前对象实例
-	 */
-	public static Global getInstance() {
-		return global;
-	}
+    /**
+     * 上传文件基础虚拟路径
+     */
+    public static final String USERFILES_BASE_URL = "/userfiles/";
 
-	/**
+    /**
+     * 获取当前对象实例
+     */
+    public static Global getInstance() {
+        return global;
+    }
+
+    /**
      * 获取配置
      * ${fns:getConfig('adminPath')}
      */
@@ -95,86 +95,88 @@ private static Logger logger = LoggerFactory.getLogger(Global.class);
         return value;
     }
 
-	/**
-	 * 获取管理端根路径
-	 */
-	public static String getAdminPath() {
-		return getConfig("adminPath");
-	}
+    /**
+     * 获取管理端根路径
+     */
+    public static String getAdminPath() {
+        return getConfig("adminPath");
+    }
 
-	/**
-	 * 获取前端根路径
-	 */
-	public static String getFrontPath() {
-		return getConfig("frontPath");
-	}
+    /**
+     * 获取前端根路径
+     */
+    public static String getFrontPath() {
+        return getConfig("frontPath");
+    }
 
-	/**
-	 * 获取URL后缀
-	 */
-	public static String getUrlSuffix() {
-		return getConfig("urlSuffix");
-	}
+    /**
+     * 获取URL后缀
+     */
+    public static String getUrlSuffix() {
+        return getConfig("urlSuffix");
+    }
 
-	/**
-	 * 获取首页JSP路径
-	 */
-	public static String getIndexPath() {
-		return getConfig("web.index.path");
-	}
+    /**
+     * 获取首页JSP路径
+     */
+    public static String getIndexPath() {
+        return getConfig("web.index.path");
+    }
 
-	/**
-	 * 是否是演示模式，演示模式下不能修改用户、角色、密码、菜单、授权
-	 */
-	public static Boolean isDemoMode() {
-		String dm = getConfig("demoMode");
-		return "true".equals(dm) || "1".equals(dm);
-	}
-	
-	/**
-	 * 页面获取常量
-	 * @see ${fns:getConst('YES')}
-	 */
-	public static Object getConst(String field) {
-		try {
-			return Global.class.getField(field).get(null);
-		} catch (Exception e) {
-			// 异常代表无配置，这里什么也不做
-		}
-		return null;
-	}
+    /**
+     * 是否是演示模式，演示模式下不能修改用户、角色、密码、菜单、授权
+     */
+    public static Boolean isDemoMode() {
+        String dm = getConfig("demoMode");
+        return "true".equals(dm) || "1".equals(dm);
+    }
 
-	/**
-	 * 获取工程路径
-	 * @return
-	 */
-	public static String getProjectPath() {
-		// 如果配置了工程路径，则直接返回，否则自动获取。
-		String projectPath = Global.getConfig("projectPath");
-		if (StringUtils.isNotBlank(projectPath)) {
-			return projectPath;
-		}
-		try {
-			File file = new DefaultResourceLoader().getResource("").getFile();
-			if (file != null) {
-				while (true) {
-					File f = new File(file.getPath() + File.separator + "src" + File.separator + "main");
-					if (f == null || f.exists()) {
-						break;
-					}
-					if (file.getParentFile() != null) {
-						file = file.getParentFile();
-					} else {
-						break;
-					}
-				}
-				projectPath = file.toString();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return projectPath;
-	}
+    /**
+     * 页面获取常量
+     *
+     * @see ${fns:getConst('YES')}
+     */
+    public static Object getConst(String field) {
+        try {
+            return Global.class.getField(field).get(null);
+        } catch (Exception e) {
+            // 异常代表无配置，这里什么也不做
+        }
+        return null;
+    }
+
+    /**
+     * 获取工程路径
+     *
+     * @return
+     */
+    public static String getProjectPath() {
+        // 如果配置了工程路径，则直接返回，否则自动获取。
+        String projectPath = Global.getConfig("projectPath");
+        if (StringUtils.isNotBlank(projectPath)) {
+            return projectPath;
+        }
+        try {
+            File file = new DefaultResourceLoader().getResource("").getFile();
+            if (file != null) {
+                while (true) {
+                    File f = new File(file.getPath() + File.separator + "src" + File.separator + "main");
+                    if (f == null || f.exists()) {
+                        break;
+                    }
+                    if (file.getParentFile() != null) {
+                        file = file.getParentFile();
+                    } else {
+                        break;
+                    }
+                }
+                projectPath = file.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return projectPath;
+    }
 
     /**
      * 获取上传文件的根目录
@@ -197,12 +199,14 @@ private static Logger logger = LoggerFactory.getLogger(Global.class);
     }
 
     public static String getJdbcType() {
-        if (map.containsKey("spring.datasource.url"))
-            return map.get("spring.datasource.url");
+
+        //默认第一个为主数据库
+        if (map.containsKey("spring.datasource.druid.data-sources.db1.url"))
+            return map.get("spring.datasource.druid.data-sources.db1.url");
         try {
-            String url = resolver.getProperty("spring.datasource.url");
+            String url = resolver.getProperty("spring.datasource.druid.data-sources.db1.url");
             String type = getDbType(url);
-            map.put("spring.datasource.url", type);
+            map.put("spring.datasource.druid.data-sources.db1.url", type);
             return type;
         } catch (Exception e) {
             logger.error("get jdbcType error", e);

@@ -55,7 +55,7 @@
         $treeTable.click(function (event) {
             var $target = $(event.target);
 
-            if ($target.attr('controller')) {
+            if ($target.attr('helloController')) {
                 $target = $target.parents('tr[haschild]').find('[arrow]');
                 //判断是否是叶子节点
 				if ($target.attr('class').indexOf(css['AN']) == -1 && $target.attr('class').indexOf(css['N']) == -1) { return; }
@@ -89,7 +89,7 @@
         function hoverActiveNode(event) {
             var $target = $(event.target);
 
-            if ($target.attr('controller')) {
+            if ($target.attr('helloController')) {
                 $target = $target.parents('tr[haschild]').find('[arrow]');
             }
 
@@ -121,7 +121,7 @@
                 
                 //给这个tr增加类为了提高选择器的效率
                 $(this).addClass(pId);
-            }).find('[controller]').css('cursor', 'pointer');
+            }).find('[helloController]').css('cursor', 'pointer');
 
             //标识父节点是否有孩子、是否最后一个节点
             $trs.each(function (i) {

@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 public class LogInterceptor extends BaseService implements HandlerInterceptor {
 
 
-    //private Logger logger = LoggerFactory.getLogger("controller-log");
+    //private Logger logger = LoggerFactory.getLogger("helloController-log");
 
     private static final ThreadLocal<Long> startTimeThreadLocal =
             new NamedThreadLocal<Long>("ThreadLocal StartTime");

@@ -87,7 +87,7 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
             dialect = new SybaseDialect();
         }
         if (dialect == null) {
-            log.error("user the mysql dialect");
+            log.error("use the mysql dialect");
             dialect = new MySQLDialect();
         }
         DIALECT = dialect;
