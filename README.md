@@ -29,6 +29,10 @@
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
     
+## 2018-05-08  
+1. 添加 api 返回标准格式   
+2. 添加全局异常处理  
+3. 删除 supcan，static  
     
 ## 2018-05-05
 
