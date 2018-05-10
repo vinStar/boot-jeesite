@@ -7,7 +7,8 @@ package com.thinkgem.jeesite.common.comEnum;
  */
 public enum ResultStatus {
     SUCCESS(200, "成功"),
-    FAIL(-200,"失败"),
+    FAIL(-200, "失败"),
+    FAIL_UNKNOWN_REASON(-201, "失败,未知原因"),
     USERNAME_OR_PASSWORD_ERROR(-1001, "用户名或密码错误"),
     USER_NOT_FOUND(-1002, "用户不存在"),
     USER_NOT_LOGIN(-1003, "用户未登录"),

@@ -5,7 +5,10 @@ import com.thinkgem.jeesite.common.datasource.DynamicDataSourceContextHolder;
 import com.thinkgem.jeesite.common.web.BaseController;
 
 import com.thinkgem.jeesite.common.web.ResultModel;
+import com.thinkgem.jeesite.modules.sys.entity.Area;
+import com.thinkgem.jeesite.modules.sys.entity.Role;
 import com.thinkgem.jeesite.modules.sys.entity.User;
+import com.thinkgem.jeesite.modules.sys.service.AreaService;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +68,22 @@ public class HomeController extends BaseController {
     public ResponseEntity<ResultModel> warn() {
         return new ResponseEntity<>(ResultModel.ok(ResultStatus.DATA_NOT_NULL), HttpStatus.OK);
     }
+
+//    @Autowired
+//    private SystemService systemService;
+
+    @RequestMapping(value = "/v2/role", method = RequestMethod.GET)
+    @ApiOperation(value = "add role", notes = "数据返回类型json|xml?", produces = "application/json,application/xml")
+    public ResponseEntity<ResultModel> area() {
+
+        Role role = new Role();
+        role.setName("test");
+
+        systemService.saveRole(role);
+
+        return new ResponseEntity<>(ResultModel.ok(role), HttpStatus.OK);
+    }
+
 
     /**
      * 随机抛出异常.

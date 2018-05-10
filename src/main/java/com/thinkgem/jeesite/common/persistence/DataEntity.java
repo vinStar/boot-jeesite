@@ -48,7 +48,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		if (!this.isNewRecord){
 			setId(IdGen.uuid());
 		}
-		User user = UserUtils.getUser();
+			User user = UserUtils.getUser();
 		if (StringUtils.isNotBlank(user.getId())){
 			this.updateBy = user;
 			this.createBy = user;

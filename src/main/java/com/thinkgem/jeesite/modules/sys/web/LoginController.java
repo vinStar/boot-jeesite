@@ -9,10 +9,15 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.common.comEnum.ResultStatus;
+import com.thinkgem.jeesite.common.web.ResultModel;
+import com.thinkgem.jeesite.common.web.TokenModel;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +35,7 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 登录Controller
@@ -37,7 +43,7 @@ import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
  * @author ThinkGem
  * @version 2013-5-31
  */
-@Controller
+@RestController
 public class LoginController extends BaseController {
 
     @Autowired
@@ -49,15 +55,17 @@ public class LoginController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return "redirect:" + adminPath + "/login";
+    public ResponseEntity<ResultModel> home() {
+
+        return new ResponseEntity<>(ResultModel.ok("请登录"), HttpStatus.OK);
     }
 
     /**
      * 管理登录
      */
     @RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public ResponseEntity<ResultModel> login(HttpServletRequest request,
+                                             HttpServletResponse response, Model model) {
         if (logger.isDebugEnabled()) {
             logger.debug("login, a/login===GET");
         }
@@ -70,24 +78,28 @@ public class LoginController extends BaseController {
             CookieUtils.setCookie(response, "tabmode", "1");
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
+            logger.debug("login, active session size: {}",
+                    sessionDAO.getActiveSessions(false).size());
         }
         // 如果已经登录，则跳转到管理首页
         if (principal != null && !principal.isMobileLogin()) {
-            return "redirect:" + adminPath;
+
+            return new ResponseEntity<>(ResultModel.ok("已登录，返回token" + principal.getSessionid()),
+                    HttpStatus.OK);
         }
 
         if (logger.isDebugEnabled()) {
             logger.debug("is it continues?");
         }
-        return "modules/sys/sysLogin";
+        return new ResponseEntity<>(ResultModel.ok("请登录"), HttpStatus.OK);
     }
 
     /**
      * 登录失败，真正登录的POST请求由Filter完成
      */
     @RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
-    public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public ResponseEntity<ResultModel> loginFail(HttpServletRequest request,
+                                                 HttpServletResponse response, Model model) {
         if (logger.isDebugEnabled()) {
             logger.debug("login, a/login===POST");
         }
@@ -96,13 +108,15 @@ public class LoginController extends BaseController {
 
         // 如果已经登录，则跳转到管理首页
         if (principal != null) {
-            return "redirect:" + adminPath;
+            return new ResponseEntity<>(
+                    ResultModel.ok("已登录，返回token" + principal.getSessionid()), HttpStatus.OK);
         }
 
         String username = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
         boolean rememberMe = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
         boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
-        String exception = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+        String exception =
+                (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         String message = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM);
 
         if (StringUtils.isBlank(message) || StringUtils.equals(message, "null")) {
@@ -122,18 +136,19 @@ public class LoginController extends BaseController {
 
         // 非授权异常，登录失败，验证码加1。
         if (!UnauthorizedException.class.getName().equals(exception)) {
-            model.addAttribute("isValidateCodeLogin", isValidateCodeLogin(username, true, false));
+            model.addAttribute("isValidateCodeLogin",
+                    isValidateCodeLogin(username, true, false));
         }
 
         // 验证失败清空验证码
         request.getSession().setAttribute(ValidateCodeServlet.VALIDATE_CODE, IdGen.uuid());
 
         // 如果是手机登录，则返回JSON字符串
-        if (mobile) {
-            return renderString(response, model);
-        }
+//        if (mobile) {
+//            return renderString(response, model);
+//        }
 
-        return "modules/sys/sysLogin";
+        return new ResponseEntity<>(ResultModel.ok(message), HttpStatus.OK);
     }
 
     /**
@@ -141,7 +156,7 @@ public class LoginController extends BaseController {
      */
     @RequiresPermissions("user")
     @RequestMapping(value = "${adminPath}")
-    public String index(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<ResultModel> index(HttpServletRequest request, HttpServletResponse response) {
         if (logger.isDebugEnabled()) {
             logger.debug("/a====");
         }
@@ -152,27 +167,29 @@ public class LoginController extends BaseController {
         isValidateCodeLogin(principal.getLoginName(), false, true);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
+            logger.debug("show index, active session size: {}",
+                    sessionDAO.getActiveSessions(false).size());
         }
 
-        // 如果是手机登录，则返回JSON字符串
-        if (principal.isMobileLogin()) {
-            if (request.getParameter("login") != null) {
-                return renderString(response, principal);
-            }
-            if (request.getParameter("index") != null) {
-                return "modules/sys/sysIndex";
-            }
-            return "redirect:" + adminPath + "/login";
+        // 登录成功返回 token
+        if (principal != null) {
+            TokenModel tokenModel=new TokenModel(principal.getLoginName(),principal.getSessionid());
+
+            return new ResponseEntity<>(ResultModel.ok(tokenModel),
+                    HttpStatus.OK);
+        } else {
+            //失败
+            return new ResponseEntity<>(ResultModel.error(ResultStatus.FAIL_UNKNOWN_REASON),
+                    HttpStatus.OK);
         }
-        return "modules/sys/sysIndex";
     }
 
     /**
      * 获取主题方案
      */
     @RequestMapping(value = "/theme/{theme}")
-    public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request, HttpServletResponse response) {
+    public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request,
+                                   HttpServletResponse response) {
         if (StringUtils.isNotBlank(theme)) {
             CookieUtils.setCookie(response, "theme", theme);
         } else {

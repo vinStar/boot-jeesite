@@ -1,6 +1,7 @@
 server:
   port: 8091
-  context-path: /    # 可以加访问后缀如项目名 /boot
+  context-path: / # 可以加访问后缀如项目名 /boot
+
 
 logging:
   level:
@@ -19,7 +20,7 @@ spring:
     druid:
       data-sources:
         db1:
-          url: jdbc:mysql://192.168.1.172:3306/test_a?useUnicode=true&characterEncoding=utf-8&useSSL=false
+          url: jdbc:mysql://192.168.1.172:3306/basisDB?useUnicode=true&characterEncoding=utf-8&useSSL=false
           username: root
           password: Aa@1234
           # 使用druid数据源
@@ -68,9 +69,7 @@ spring:
           maxOpenPreparedStatements: 20
           # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
           connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      url:
-    dbcp2:
-      url:
+
 
           # 合并多个DruidDataSource的监控数据
           #useGlobalDataSourceStat: true
@@ -115,7 +114,9 @@ userfiles:
 #会话过期时间
 session.sessionTimeout: 1800000
 session.sessionTimeoutClean: 120000
+#session key
 session.simpleCookie: jeesite.session.id
+
 
 #admin页面管理Path
 adminPath: /a

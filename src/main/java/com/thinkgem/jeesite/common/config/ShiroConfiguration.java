@@ -68,7 +68,7 @@ public class ShiroConfiguration {
 //        linkedHashMap.put(adminPath + "/cas", "cas");
         linkedHashMap.put(adminPath + "/login", "anon");
         linkedHashMap.put(adminPath + "/logout", "logout");
-        linkedHashMap.put("modules/sys/sysLogin", "anon");
+        linkedHashMap.put("/a/login", "anon");
         linkedHashMap.put("/**", "anon");
         linkedHashMap.put(adminPath + "/**", "user");
 //        linkedHashMap.put("/act/editor/**", "user");
@@ -122,8 +122,9 @@ public class ShiroConfiguration {
         sessionManager.setGlobalSessionTimeout(sessionTimeout);
         sessionManager.setSessionValidationInterval(sessionValidationInterval);
         sessionManager.setSessionValidationSchedulerEnabled(true);
-        sessionManager.setSessionIdCookie(new SimpleCookie(simpleCookie));
-        sessionManager.setSessionIdCookieEnabled(true);
+        //sessionManager.setSessionIdCookie(new SimpleCookie(simpleCookie));
+        //sessionManager.setSessionIdCookieEnabled(false);
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
         return sessionManager;
     }
 
