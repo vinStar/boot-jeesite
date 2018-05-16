@@ -15,6 +15,8 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.6.RELEASE</version>
     </parent>
+
+    <!-- 项目属性 -->
     <properties>
         <!-- main version setting -->
         <mybatis.version>3.2.8</mybatis.version>

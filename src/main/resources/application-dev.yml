@@ -1,6 +1,11 @@
 server:
   port: 8091
   context-path: / # 可以加访问后缀如项目名 /boot
+management: #健康监控
+  security:
+    enabled: false #关掉安全认证
+  port: 1101 #管理端口调整成1101
+  context-path: /admin #actuator的访问路径
 
 
 logging:
