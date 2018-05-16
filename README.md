@@ -29,6 +29,11 @@
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
     
+## 2018-05-10  
+1. shiro 配置支持移动端，head 添加 Authorization 存储 sessionid   
+2. shiro 升级1.3.2 配置取消 url 携带 sessionId
+3. 修改登录 controller 统一返回类型 resultMode ，移动端认证成功返回 token   
+
 ## 2018-05-08  
 1. 添加 api 返回标准格式   
 2. 添加全局异常处理  
