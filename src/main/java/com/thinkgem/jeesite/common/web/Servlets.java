@@ -25,7 +25,7 @@ import com.google.common.net.HttpHeaders;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.utils.Encodes;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.thinkgem.jeesite.modules.sys.security.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**

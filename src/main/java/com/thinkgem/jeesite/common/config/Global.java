@@ -12,6 +12,10 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.DefaultResourceLoader;
 
 import java.io.File;
@@ -24,11 +28,20 @@ import java.util.Map;
  * @author ThinkGem
  * @version 2014-06-25
  */
-public class Global {
+@Configuration
+@EnableCaching
+public class Global implements EnvironmentAware {
 
     private static Logger logger = LoggerFactory.getLogger(Global.class);
 
-    static RelaxedPropertyResolver resolver;
+    private Environment environment;
+    private static RelaxedPropertyResolver propertyResolver;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+        Global.propertyResolver = new RelaxedPropertyResolver(environment);
+    }
 
     /**
      * 当前对象实例
@@ -43,7 +56,7 @@ public class Global {
     /**
      * 属性文件加载对象
      */
-    private static PropertiesLoader loader = new PropertiesLoader("bootstrap.yml");
+    private static PropertiesLoader loader = new PropertiesLoader("bootstrap.yml", "application.yml");
 
     /**
      * 显示/隐藏
@@ -69,13 +82,6 @@ public class Global {
     public static final String USERFILES_BASE_URL = "/userfiles/";
 
     /**
-     * 获取当前对象实例
-     */
-    public static Global getInstance() {
-        return global;
-    }
-
-    /**
      * 获取配置
      * ${fns:getConfig('adminPath')}
      */
@@ -83,7 +89,7 @@ public class Global {
         String value = map.get(key);
         if (value == null) {
             try {
-                value = resolver.getProperty(key);
+                value = propertyResolver.getProperty(key);
                 if (StringUtils.isBlank(value))
                     throw new RuntimeException("value null");
                 map.put(key, value);
@@ -198,13 +204,16 @@ public class Global {
         return dir;
     }
 
-    public static String getJdbcType() {
+//    @Value("${spring.datasource.druid.data-sources.db1.url}")
+//    public static String url;
 
+    public static String getJdbcType() {
+        String url = Global.getConfig("spring.datasource.druid.data-sources.db1.url");
         //默认第一个为主数据库
-        if (map.containsKey("spring.datasource.druid.data-sources.db1.url"))
+        if (map.containsKey(""))
             return map.get("spring.datasource.druid.data-sources.db1.url");
         try {
-            String url = resolver.getProperty("spring.datasource.druid.data-sources.db1.url");
+            //String url = url;
             String type = getDbType(url);
             map.put("spring.datasource.druid.data-sources.db1.url", type);
             return type;

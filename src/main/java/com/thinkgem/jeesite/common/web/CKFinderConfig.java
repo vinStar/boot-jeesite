@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.thinkgem.jeesite.modules.sys.security.Principal;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.w3c.dom.Document;
@@ -25,7 +26,6 @@ import com.ckfinder.connector.utils.AccessControlUtil;
 import com.ckfinder.connector.utils.PathUtils;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.utils.FileUtils;
-import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
@@ -42,7 +42,7 @@ public class CKFinderConfig extends Configuration {
 
     @Override
     protected Configuration createConfigurationInstance() {
-        SystemAuthorizingRealm.Principal principal = UserUtils.getPrincipal();
+        Principal principal = UserUtils.getPrincipal();
         if (principal == null) {
             return new CKFinderConfig(this.servletConf);
         }
@@ -76,7 +76,7 @@ public class CKFinderConfig extends Configuration {
 
 
     @Override
-	public void init() throws Exception {
+    public void init() throws Exception {
         DefaultResourceLoader loader = new DefaultResourceLoader();
         Resource resource = loader.getResource(this.xmlFilePath);
         Class<?> clazz = getClass().getSuperclass();

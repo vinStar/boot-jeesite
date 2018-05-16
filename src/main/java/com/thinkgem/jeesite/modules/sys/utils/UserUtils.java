@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+ * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
 package com.thinkgem.jeesite.modules.sys.utils;
 
@@ -24,7 +24,8 @@ import com.thinkgem.jeesite.modules.sys.entity.Menu;
 import com.thinkgem.jeesite.modules.sys.entity.Office;
 import com.thinkgem.jeesite.modules.sys.entity.Role;
 import com.thinkgem.jeesite.modules.sys.entity.User;
-import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.thinkgem.jeesite.modules.sys.security.Principal;
+
 
 /**
  * 用户工具类
@@ -123,7 +124,7 @@ public class UserUtils {
      * @return 取不到返回 new User()
      */
     public static User getUser() {
-        Principal principal = getPrincipal();
+        Principal principal = (Principal) getPrincipal();
         if (principal != null) {
             User user = get(principal.getId());
             if (user != null) {
@@ -132,9 +133,7 @@ public class UserUtils {
             return new User();
         }
         // 如果没有登录，则返回实例化空的User对象。
-        // 无权限认证，默认为 admin 操作
-        //return new User();//("1","admin");
-        return new User("admin", "admin");
+        return new User();
     }
 
     /**
@@ -246,9 +245,11 @@ public class UserUtils {
         try {
             Subject subject = SecurityUtils.getSubject();
             Principal principal = (Principal) subject.getPrincipal();
+
             if (principal != null) {
                 return principal;
             }
+            //subject.logout();
         } catch (UnavailableSecurityManagerException e) {
 
         } catch (InvalidSessionException e) {

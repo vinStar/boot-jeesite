@@ -18,6 +18,7 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 
 /**
  * 表单验证（包含验证码）过滤类
+ * 身份验证过滤器，url 拦截
  * @author ThinkGem
  * @version 2014-5-19
  */

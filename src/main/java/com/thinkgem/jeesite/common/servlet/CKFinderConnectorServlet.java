@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ckfinder.connector.ConnectorServlet;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.utils.FileUtils;
-import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.thinkgem.jeesite.modules.sys.security.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**

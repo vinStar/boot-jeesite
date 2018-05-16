@@ -11,26 +11,17 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring boot启动类
+ *
  * @author OAO
  */
 @EnableCaching
 @SpringBootApplication
-public class ThinkgemJeesiteDriver   extends SpringBootServletInitializer{
+public class ThinkgemJeesiteDriver {
 
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        //set register error pagefilter false
-//        //setRegisterErrorPageFilter(false);
-//        return application.sources(ThinkgemJeesiteDriver.class);
-//    }
+    public static void main(String[] args) throws Exception {
 
-    public static void main(String[] args)  throws Exception{
-
-    	SpringApplication.run(ThinkgemJeesiteDriver.class, args);
-		SystemService.printKeyLoadMessage();
+        SpringApplication.run(ThinkgemJeesiteDriver.class, args);
+        SystemService.printKeyLoadMessage();
     }
-
-
-
 
 }

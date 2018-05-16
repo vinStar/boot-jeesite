@@ -122,14 +122,14 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--热部署方法-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+        <!--热部署方法 , 暂弃用，会引起 shiro 无法转换 Principal 对象-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-devtools</artifactId>-->
 
-            <!-- optional=true,依赖不会传递 -->
-            <optional>true</optional>
-        </dependency>
+        <!--&lt;!&ndash; optional=true,依赖不会传递 &ndash;&gt;-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
 
         <!-- freemarker engine -->
         <dependency>

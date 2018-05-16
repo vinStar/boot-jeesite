@@ -32,7 +32,7 @@ import com.thinkgem.jeesite.common.utils.DateUtils;
  * @author ThinkGem
  * @version 2014-7-24
  */
-@Component("sessionDAO")
+//@Component("sessionDAO")
 public class CacheSessionDAO extends EnterpriseCacheSessionDAO implements SessionDAO,InitializingBean{
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

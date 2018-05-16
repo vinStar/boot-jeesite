@@ -14,6 +14,7 @@ import com.thinkgem.jeesite.common.web.ResultModel;
 import com.thinkgem.jeesite.common.web.TokenModel;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ import com.thinkgem.jeesite.common.utils.IdGen;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
-import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.thinkgem.jeesite.modules.sys.security.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,11 +55,11 @@ public class LoginController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<ResultModel> home() {
-
-        return new ResponseEntity<>(ResultModel.ok("请登录"), HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public ResponseEntity<ResultModel> home() {
+//
+//        return new ResponseEntity<>(ResultModel.ok("请登录"), HttpStatus.OK);
+//    }
 
     /**
      * 管理登录
@@ -84,7 +85,7 @@ public class LoginController extends BaseController {
         // 如果已经登录，则跳转到管理首页
         if (principal != null && !principal.isMobileLogin()) {
 
-            return new ResponseEntity<>(ResultModel.ok("已登录，返回token" + principal.getSessionid()),
+            return new ResponseEntity<>(ResultModel.ok("已登录get，返回token" + principal.getSessionid()),
                     HttpStatus.OK);
         }
 
@@ -108,8 +109,10 @@ public class LoginController extends BaseController {
 
         // 如果已经登录，则跳转到管理首页
         if (principal != null) {
-            return new ResponseEntity<>(
-                    ResultModel.ok("已登录，返回token" + principal.getSessionid()), HttpStatus.OK);
+            TokenModel tokenModel = new TokenModel(principal.getLoginName(), principal.getSessionid());
+
+            return new ResponseEntity<>(ResultModel.ok(tokenModel),
+                    HttpStatus.OK);
         }
 
         String username = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
@@ -173,7 +176,7 @@ public class LoginController extends BaseController {
 
         // 登录成功返回 token
         if (principal != null) {
-            TokenModel tokenModel=new TokenModel(principal.getLoginName(),principal.getSessionid());
+            TokenModel tokenModel = new TokenModel(principal.getLoginName(), principal.getSessionid());
 
             return new ResponseEntity<>(ResultModel.ok(tokenModel),
                     HttpStatus.OK);
