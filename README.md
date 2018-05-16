@@ -36,11 +36,11 @@
 问题记录： 
 1. 去掉热部署，使用热部署 shiro+redis 时报错：`java.lang.ClassCastException`  
 `Principal principal = (Principal) subject.getPrincipal();`  
-三种解决办法，这里去掉采用去掉热更新配置  
-[refer to :](https://blog.csdn.net/zhaoyachao123/article/details/79413908)  
-2. ShiroConfiguration @Value获取值为 null
-`public static LifecycleBeanPostProcessor`此处设置为 `static` 可行
-[原因及解决 refer to :](https://stackoverflow.com/questions/31388445/apache-shiro-jdbcrealm-with-javaconfig-and-spring-boot)
+三种解决办法，这里去掉采用去掉热更新配置   
+[refer to :](https://blog.csdn.net/zhaoyachao123/article/details/79413908)    
+2. ShiroConfiguration @Value获取值为 null  
+`public static LifecycleBeanPostProcessor`此处设置为 `static` 可行  
+[原因及解决 refer to :](https://stackoverflow.com/questions/31388445/apache-shiro-jdbcrealm-with-javaconfig-and-spring-boot)  
 
     
 ## 2018-05-10  
