@@ -34,7 +34,7 @@
 1. 拆分多模块开发模式  
 2. 先把 gen 生产代码剥离出来，还用原来的 jsp 页面很是经典  
 3. 还存在问题，之后解决    
-问题记录： 
+- 问题记录： 
 1. 健康监控 `spring-boot-starter-actuator` 配置文件不设置开辟单独端口， 
 与 拦截器 `WebMvcConfigurerAdapter` 冲突  
 2. `druid-starter` 配置允许`multi-statement-allow` 支持sql批量操作  
@@ -44,7 +44,7 @@
 1. global,读取属性文件配置 RelaxedPropertyResolver 实现  
 2. 配置缓存shiro redis，分布式部署共享 redis 存储 sessionId
 3. ShiroConfiguration 配置简化，去掉@Bean 方法传参方式
-问题记录： 
+- 问题记录：   
 1. 去掉热部署，使用热部署 shiro+redis 时报错：`java.lang.ClassCastException`  
 `Principal principal = (Principal) subject.getPrincipal();`  
 三种解决办法，这里去掉采用去掉热更新配置   
