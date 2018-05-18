@@ -28,6 +28,17 @@
     - http://localhost:8087   登录页    
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
+    
+    
+## 2018-05-18  
+1. 拆分多模块开发模式  
+2. 先把 gen 生产代码剥离出来，还用原来的 jsp 页面很是经典  
+3. 还存在问题，之后解决    
+问题记录： 
+1. 健康监控 `spring-boot-starter-actuator` 配置文件不设置开辟单独端口， 
+与 拦截器 `WebMvcConfigurerAdapter` 冲突  
+2. `druid-starter` 配置允许`multi-statement-allow` 支持sql批量操作  
+3. 代码生成刚好用 springboot 支持 jsp 的模式 ， 就在 jeesite-gen-web 模块  
 
 ## 2018-05-16  
 1. global,读取属性文件配置 RelaxedPropertyResolver 实现  
