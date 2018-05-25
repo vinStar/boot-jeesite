@@ -28,7 +28,11 @@
     - http://localhost:8087   登录页    
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
-    
+
+## 2018-05-25
+1. docker-compose fastDFS   
+[refer to ](https://github.com/luhuiguo/fastdfs-docker)  
+[refer to 使用docker-compose一键部署分布式文件系统FastDFS](http://www.yunwzs.com/1910.html) 
     
 ## 2018-05-23  
 1. docker-compose 配置 zipkin+elasticsearch     
