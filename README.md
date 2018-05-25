@@ -30,6 +30,10 @@
     - http://localhost:8087/test/  返回测试api数据
     
     
+## 2018-05-23  
+1. docker-compose 配置 zipkin+elasticsearch     
+2. 添加 ZipkinConfig 配置类，pom 添加 zipkin 依赖  
+  
 ## 2018-05-18  
 1. 拆分多模块开发模式  
 2. 先把 gen 生产代码剥离出来，还用原来的 jsp 页面很是经典  
