@@ -16,6 +16,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-core:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.java:zipkin:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-spancollector-http:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-web-servlet-filter:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-http:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-okhttp:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-actuator:1.5.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.6.RELEASE" level="project" />
