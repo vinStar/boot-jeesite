@@ -1,1 +1,1 @@
-*.plsql linguist-language=Java
+*.sql linguist-language=Java
