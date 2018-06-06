@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>myUploader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/webuploader.css"/>
+
+</head>
+<body onload="">
+<div id="uploader" class="wu-example">
+    <h1>上传</h1>
+    <!--用来存放文件信息-->
+    <div id="thelist" class="uploader-list"></div>
+    <div class="btns">
+        <div id="picker">选择文件</div>
+        <button id="ctlBtn" class="btn btn-default">开始上传</button>
+    </div>
+
+
+    <div id="res">
+
+    </div>
+
+</div>
+
+<div>
+    <h1>下载</h1>
+    <a href="/download?fileName=设计师.png&amp;path=http://192.168.1.172:15001/M00/00/00/wKgBrFn8eH6AH1iHAAB__xX-Iww374.png"
+       target="_self">
+        http://ivt.upload.cs/download?fileName=设计师.png&amp;path=http://192.168.1.172:15001/M00/00/00/wKgBrFn8eH6AH1iHAAB__xX-Iww374.png
+    </a>
+</div>
+
+<script src="jquery.js"></script>
+<script src="webuploader.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        // 实例化
+        var uploader = WebUploader.create({
+            // 选完文件后，是否自动上传。
+            auto: false,
+            pick: '#picker',
+            server: 'http://localhost:8091/upload',
+            method: 'POST',
+            accept: {
+                title: 'Images',
+                extensions: 'jpg,jpeg,png',
+                mimeTypes: 'image/jpg,image/jpeg,image/png'
+            },
+            resize: false,
+            disableGlobalDnd: true,
+            fileNumLimit: 10,
+            fileSizeLimit: 2000 * 1024 * 1024,    // 200 M
+            fileSingleSizeLimit: 500 * 1024 * 1024    // 50 M
+        });
+
+        // 当有文件被添加进队列的时候
+        uploader.on('fileQueued', function (file) {
+            $("#thelist").append('<div id="' + file.id + '" class="item">' +
+                '<h4 class="info">' + file.name + '</h4>' +
+                '<p class="state">等待上传...</p>' +
+                '</div>');
+        });
+
+        uploader.on('uploadSuccess', function (file, response) {
+            $('#' + file.id).find('p.state').text('已上传');
+            console.log(response._raw)
+            $("#res").html(response._raw)
+        });
+
+        uploader.on('uploadError', function (file) {
+            $('#' + file.id).find('p.state').text('上传出错');
+        });
+
+        uploader.on('uploadComplete', function (file) {
+            $('#' + file.id).find('.progress').fadeOut();
+        });
+
+        //上传按钮点击事件
+        $("#ctlBtn").on('click', function () {
+            uploader.upload();
+        });
+
+    })
+</script>
+</body>
+</html>

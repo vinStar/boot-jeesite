@@ -13,6 +13,10 @@
     <modules>
         <module>boot-jeesite-common</module>
         <module>boot-jeesite-gen-web</module>
+        <module>boot-jeesite-fastdfs</module>
+        <module>boot-jeesite-common-config</module>
+        <module>boot-jeesite-freemarker</module>
+        <module>boot-jeesite-oss</module>
     </modules>
 
 
@@ -83,7 +87,7 @@
     <!--</pluginRepositories>-->
     <dependencies>
 
-        <!-- 健康监控 HTTP调用的方式，依赖boot-web-->
+        <!-- 健康监控 HTTP调用的方式，依赖bcontroller-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -219,7 +223,7 @@
         </dependency>
         <!--<dependency>-->
         <!--<groupId>org.apache.shiro</groupId>-->
-        <!--<artifactId>shiro-web</artifactId>-->
+        <!--<artifactId>shcontroller-web</artifactId>-->
         <!--<version>${shiro.version}</version>-->
         <!--</dependency>-->
         <dependency>
@@ -375,6 +379,16 @@
     </dependencies>
     <build>
         <plugins>
+            <!-- 资源文件拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- java编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -384,16 +398,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <excludeArtifactIds>
-                        slf4j-log4j12
-                    </excludeArtifactIds>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                    <!--<excludeArtifactIds>-->
+                        <!--slf4j-log4j12-->
+                    <!--</excludeArtifactIds>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

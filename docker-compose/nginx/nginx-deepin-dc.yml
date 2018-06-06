@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  nginx:
+    container_name: nginx
+    # nginx -v 1.13.12
+    image: nginx:latest
+    volumes:
+      - /usr/local/nginx/conf.d:/etc/nginx/conf.d
+      - /usr/local/nginx/nginx.conf:/etc/nignx/nginx.conf
+      - /usr/local/nginx/html:/usr/share/nginx/html
+      - /usr/local/nginx/log:/var/log/nginx
+    ports:
+      - 8090:80
+    environment:
+      - NGINX_HOST=192.168.1.21
+      - NGINX_PORT=80

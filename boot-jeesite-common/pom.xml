@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.thinkgem.jeesite</groupId>
+            <artifactId>boot-jeesite-common-config</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.zipkin.brave</groupId>
             <artifactId>brave-core</artifactId>
             <version>3.9.0</version>
@@ -42,6 +48,20 @@
             <version>3.9.0</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <excludeArtifactIds>
+                        slf4j-log4j12
+                    </excludeArtifactIds>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
