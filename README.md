@@ -28,6 +28,14 @@
     - http://localhost:8087   登录页    
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
+    
+## 2018-06-06  
+1. docker-compose 配置添加 nginx  
+2. fastdfs 上传 demo （webuploader）  
+3. 分离 configer moudule  
+4. freemarker 生成静态页 demo  
+5. oss 暂未实现（七牛云）  
+    
 
 ## 2018-05-25
 1. docker-compose fastDFS   
