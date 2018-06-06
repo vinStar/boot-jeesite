@@ -1,0 +1,135 @@
+server:
+  port: 8091
+  context-path: / # 可以加访问后缀如项目名 /boot
+
+
+logging:
+  level:
+    root: error
+    com.thinkgem.jeesite: debug
+    org.apache.shiro.cache.ehcache.EhCacheManager: warn
+spring:
+  autoconfigure:
+    exclude:
+      # 多数据源场景会导致 `javax.sql.DataSource` 和 `org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`
+      # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  #数据库的配置
+  datasource:
+#  相当于基类，（不同类型数据库不可行）子类可以覆盖比如db1 ，db2
+    druid:
+      data-sources:
+        db1:
+          url: jdbc:mysql://192.168.1.172:3306/test_a?useUnicode=true&characterEncoding=utf-8&useSSL=false
+          username: root
+          password: Aa@1234
+          # 使用druid数据源
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.jdbc.Driver
+          # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+          filters: stat,wall,slf4j
+          # 初始化大小，最小，最大
+          initialSize: 1
+          minIdle: 3
+          maxActive: 20
+          maxWait: 60000
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: SELECT 'x' FROM DUAL
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+           # 打开PSCache，并且指定每个连接上PSCache的大小
+          poolPreparedStatements: true
+          maxOpenPreparedStatements: 20
+          # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        db2:
+          url: jdbc:jtds:sqlserver://192.168.1.40:1433/jeesite;instance=xm
+          username: sa
+          password: Aa123456
+          # 使用druid数据源
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: net.sourceforge.jtds.jdbc.Driver
+          # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+          filters: stat,wall,slf4j
+          # 初始化大小，最小，最大
+          initialSize: 1
+          minIdle: 3
+          maxActive: 20
+          maxWait: 60000
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: SELECT 1
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+           # 打开PSCache，并且指定每个连接上PSCache的大小
+          poolPreparedStatements: true
+          maxOpenPreparedStatements: 20
+          # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+          # 合并多个DruidDataSource的监控数据
+          #useGlobalDataSourceStat: true
+  #redis配置
+  redis: 
+     database: 16
+     password:
+     host: 192.168.1.172
+     port: 7000
+     timeout: 0
+     pool: 
+       maxIdle: 300
+       maxTotal: 60000
+       testOnBorrow: true
+
+#springMvc的配置
+  mvc:
+     view:
+       prefix: /WEB-INF/views/
+       suffix: .jsp
+       #index: /a/login
+     servlet:
+       load-on-startup: 1
+#spring-ehcache的配置
+#  cache:
+#    type: ehcache
+#    ehcache:
+#      config: classpath:ehcache.xml
+  freemarker:
+    #模板加载的位置
+     template-loader-path: classpath:/templates
+#mybatis的配置
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+  mapper-locations: classpath:/mappings/**/*.xml
+  type-aliases-package: com.thinkgem.jeesite
+#分页配置
+page:
+  pageSize: 10
+#文件上传的路径
+userfiles:
+  basedir: ../jeesite/upload
+
+#会话过期时间
+session.sessionTimeout: 1800000
+session.sessionTimeoutClean: 120000
+#session key
+session.simpleCookie: jeesite.session.id
+
+
+#admin页面管理Path
+adminPath: /a
+
+#前端基础路径
+frontPath: /f
+
+#前端URL后缀
+urlSuffix: .html
+
+#工程路径，在代码生成时获取不到工程路径时，可再此指定绝对路径。
+projectPath: /Users/vin/DevDemo/boot-jeesite
+
+
