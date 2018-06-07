@@ -8,3 +8,15 @@ logs/
 target/
 /.idea/
 boot-jeesite
+boot-jeesite-common/boot-jeesite-common.iml
+boot-jeesite-common-config/boot-jeesite-common-config.iml
+boot-jeesite-fastdfs/boot-jeesite-fastdfs.iml
+boot-jeesite-freemarker/boot-jeesite-freemarker.iml
+boot-jeesite-oss/boot-jeesite-oss.iml
+/boot-jeesite.iml
+/boot-jeesite-common/boot-jeesite-common.iml
+/boot-jeesite-common-config/boot-jeesite-common-config.iml
+/boot-jeesite-fastdfs/boot-jeesite-fastdfs.iml
+/boot-jeesite-freemarker/boot-jeesite-freemarker.iml
+/boot-jeesite-gen-web/boot-jeesite-gen-web.iml
+/boot-jeesite-oss/boot-jeesite-oss.iml
