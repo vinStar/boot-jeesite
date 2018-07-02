@@ -12,6 +12,14 @@
     <artifactId>boot-jeesite-oss</artifactId>
 
     <dependencies>
+
+        <!--Generating your own meta-data using the annotation processor-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>com.thinkgem.jeesite</groupId>
             <artifactId>boot-jeesite-common</artifactId>

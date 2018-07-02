@@ -37,6 +37,16 @@ public class Swagger2 {
                 .paths(PathSelectors.any()).build();
     }
 
+    @Bean
+    public Docket ossApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("oss-API接口文档")
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.thinkgem.jeesite.modules.oss"))
+                .paths(PathSelectors.any()).build();
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("xx系统")

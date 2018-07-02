@@ -121,6 +121,8 @@ spring:
   freemarker:
     #模板加载的位置
      template-loader-path: classpath:/templates
+  application:
+    name: common
 #mybatis的配置
 mybatis:
   config-location: classpath:/mybatis-config.xml
@@ -156,11 +158,11 @@ staticPath: /Users/vin/DevDemo/staticHtml/
 
 # 七牛云配置
 # bucket是创建的存储空间名
-# path对应存储空间的访问域名
+# bucket-url对应存储空间的访问域名
 qiniu:
-  accessKey: zHy3Im3Yjxxxxxx
-  secretKey: LQR4mszxxxxxxxx
-  bucket: xyz
-  path: http://xxx.bkt.clouddn.com
+  accessKey: BemOhE_uOU7B0kMR6XXXXXX
+  secretKey: aR7uPVkuS2caKqS7kP-mwdCLXXXXXXX
+  bucket: XXXX-img0
+  bucket-url: http://img.XXXX.cn/
 
 

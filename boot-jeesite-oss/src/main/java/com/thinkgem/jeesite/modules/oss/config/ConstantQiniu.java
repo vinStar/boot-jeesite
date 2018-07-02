@@ -17,5 +17,5 @@ public class ConstantQiniu {
 
     private String bucket;
 
-    private String path;
+    private String bucketUrl;
 }
