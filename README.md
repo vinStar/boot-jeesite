@@ -29,6 +29,11 @@
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
     
+    
+## 2018-07-02  
+1. oss 实现（七牛云） 
+2. 准备集成 cloud  
+    
 ## 2018-06-06  
 1. docker-compose 配置添加 nginx  
 2. fastdfs 上传 demo （webuploader）  
