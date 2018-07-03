@@ -1,0 +1,55 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: cloud-eureka
+##eureka.client.serviceUrl.defaultZone
+eureka:
+  client:
+    register-with-eureka: false #是否将自身注册
+    fetch-registry: false  #如果为true，启动时报警.
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  instance:
+    appname: boot-jeesite-cloud-eureka
+    hostname: 127.0.0.1
+  server:
+    enable-self-preservation: false # close self-preservation ，默认开启 true
+    eviction-interval-timer-in-ms: 4000 # 清理间隔 默认 60*6000 ，单位毫秒
+
+management: #健康监控
+  security:
+    enabled: false #关掉安全认证
+
+
+
+spring:
+  cloud:
+    #config:
+    #uri: http://127.0.0.1:${config.port:8888}
+    #name: service-A
+  application:
+    name: service-A
+eureka:
+  client:
+    service-url:
+      default-zone: http\://master\:8761/eureka/,\
+      http\://backup1\:8762/eureka/,\
+      http\://backup2\:8763/eureka/
+  instance:
+    hostname: cloud-service-A
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 30
+server:
+  port: 8081
+
+management: #健康监控
+  security:
+    enabled: false #关掉安全认证
+
+
+
+
+
+

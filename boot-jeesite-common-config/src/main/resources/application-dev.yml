@@ -7,6 +7,7 @@ management: #健康监控
 #  port: 1101 #管理端口调整成1101
   context-path: /admin #actuator的访问路径
 
+
 #log
 logging:
   level:
@@ -164,5 +165,11 @@ qiniu:
   secretKey: aR7uPVkuS2caKqS7kP-mwdCLXXXXXXX
   bucket: XXXX-img0
   bucket-url: http://img.XXXX.cn/
+
+# eureka
+
+
+
+
 
 
