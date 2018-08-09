@@ -1,7 +1,6 @@
 package com.thinkgem.jeesite.modules.m1.web;
 
-import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.common.web.ResultModel;
+import com.thinkgem.jeesite.common.web.*;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by vin on 2018/7/3.
  */
 @RestController
-@RequestMapping(value = "s1")
+@RequestMapping(value = "sa")
 public class ServiceController extends BaseController {
 
     @Autowired

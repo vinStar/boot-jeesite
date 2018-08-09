@@ -105,16 +105,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <excludeArtifactIds>
-                        slf4j-log4j12
-                    </excludeArtifactIds>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                    <!--<excludeArtifactIds>-->
+                        <!--slf4j-log4j12-->
+                    <!--</excludeArtifactIds>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

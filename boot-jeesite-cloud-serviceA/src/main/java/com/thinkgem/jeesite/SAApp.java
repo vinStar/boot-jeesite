@@ -8,7 +8,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * Created by vin on 2018/7/3.
  */
-//@RefreshScope 配置动态更新
+@RefreshScope //配置动态更新
 @EnableDiscoveryClient
 @SpringBootApplication
 public class SAApp {

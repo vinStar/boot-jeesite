@@ -1,5 +1,5 @@
 server:
-  port: 8091
+  port: 8097
   context-path: / # 可以加访问后缀如项目名 /boot
 management: #健康监控
   security:
@@ -166,10 +166,29 @@ qiniu:
   bucket: XXXX-img0
   bucket-url: http://img.XXXX.cn/
 
-# eureka
+# eureka  - client
+#spring:
+#  cloud:
+#    #config:
+#    #uri: http://127.0.0.1:${config.port:8888}
+#    #name: service-A
+#  application:
+#    name: service-A
+eureka:
+  client:
+    service-url:
+      default-zone: http\://master\:8761/eureka/,\
+                  http\://slave1\:8762/eureka/,\
+                  http\://slave2\:8763/eureka/
+  instance:
+    hostname: service-a
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 30
 
 
-
+#management: #健康监控
+#  security:
+#    enabled: false #关掉安全认证
 
 
 
