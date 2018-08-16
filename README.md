@@ -28,7 +28,57 @@
     - http://localhost:8087   登录页    
 - 前后端模式后端，可去除支持 jsp 的相关支持，springboot 启动类启动，打成 jar 包部署。   
     - http://localhost:8087/test/  返回测试api数据
-    
+ 
+ 
+## 2018-08-16
+
+1. 服务调用 SA->SB , resttemplate getForEntity 
+2. root 日志级别，当前为 error，info 输出 tomcat port  
+
+ 
+## 2018-08-09
+
+1. Eureka 不要关闭自我保护，多 e-server 开启自我注册   
+
+- eureka-server 
+准备单机情况下： host 修改 添加 127.0.0.1 对应 master slave1  slave2   
+```
+master
+
+java -jar boot-jeesite-cloud-eureka-1.0.jar --server.port=8761 --eureka.instance.hostname=master --eureka.client.serviceUrl.defaultZone=http://slave1:8762/eureka/,http://slave2:8763/eureka/  
+
+slave1
+java -jar boot-jeesite-cloud-eureka-1.0.jar  --server.port=8762 --eureka.instance.hostname=slave1 --eureka.client.serviceUrl.defaultZone=http://master:8761/eureka/,http://slave2:8763/eureka/  
+
+slave2
+java -jar boot-jeesite-cloud-eureka-1.0.jar --server.port=8763 --eureka.instance.hostname=slave2 --eureka.client.serviceUrl.defaultZone=http://master:8761/eureka/,http://slave1:8762/eureka/  
+```
+- service 服务
+服务 A 调用 B
+
+```
+service A  
+
+java -jar boot-jeesite-cloud-serviceA-1.0.jar --server.port=8093 --eureka.instance.appname=cloud-service-A --spring.application.name=cloud-service-A --eureka.client.serviceUrl.defaultZone=http://master:8761/eureka/,http://slave1:8762/eureka/,http://slave2:8763/eureka/
+
+service B
+
+java -jar boot-jeesite-cloud-serviceB-1.0.jar --server.port=8097 --eureka.instance.appname=cloud-service-B --spring.application.name=cloud-service-B --eureka.client.serviceUrl.defaultZone=http://master:8761/eureka/,http://slave1:8762/eureka/,http://slave2:8763/eureka/
+```
+
+2. 服务 A 调用 B 暂未实现
+
+
+3. 问题
+1) host slave1 可以，slave_1 下划线形式不可以（mac）eureka 服务启动报错，`freemaker xxx xxx unknown host:xxxx`  
+答： 特意查了一下，大意是域名不运行存在的字符含 下划线 [refer to](https://blog.csdn.net/codejoker/article/details/5367331)  
+
+2) 多模块，打包问题，引用顺序--报错提示没有找到main函数  
+别引用模块不要引入 spring-boot-maven-plugin插件  
+[refer to](https://blog.csdn.net/lizhongfu2013/article/details/79656972).   
+
+
+   
     
 ## 2018-07-02  
 1. oss 实现（七牛云） 
