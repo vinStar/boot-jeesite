@@ -23,11 +23,11 @@ public class ServiceController extends BaseController {
 
     @RequestMapping(value = "/v2/getAdmin", method = RequestMethod.GET)
     @ApiOperation(value = "获取用户", notes = "数据返回类型json|xml?", produces = "application/json,application/xml")
-    public ResponseEntity<ResultModel> test() {
+    public User test() {
 
         User user = systemService.getUser("1");
 
-        return new ResponseEntity<>(ResultModel.ok(user), HttpStatus.OK);
+        return user;
     }
 
 }

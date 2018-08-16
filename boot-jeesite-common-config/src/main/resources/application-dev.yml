@@ -11,7 +11,7 @@ management: #健康监控
 #log
 logging:
   level:
-    root: error
+    root: error #info 级别输出 tomcat port
     com.thinkgem.jeesite: debug
     org.apache.shiro.cache.ehcache.EhCacheManager: warn
 #spring mvc datasource redis

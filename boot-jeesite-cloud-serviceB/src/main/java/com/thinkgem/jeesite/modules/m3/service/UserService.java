@@ -1,5 +1,6 @@
 package com.thinkgem.jeesite.modules.m3.service;
 
+
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.thinkgem.jeesite.common.web.ResultModel;
 import com.thinkgem.jeesite.modules.sys.entity.User;
@@ -13,10 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 
 /**
@@ -32,15 +38,14 @@ public class UserService {
 
 
     // 降级
-    //@HystrixCommand(fallbackMethod = "fallbackGetUser")
-
+    @HystrixCommand(fallbackMethod = "fallbackGetUser")
     @ApiOperation(value = "获取用户", notes = "数据返回类型json|xml?", produces = "application/json,application/xml")
-    public ResponseEntity<ResultModel> getUser() {
+    public  User getUser() {
 
         //String aa = restTemplate.getForEntity("http://" + SERVICE_A_NAME + "/sa/v2/getAdmin", String.class);
-        ResponseEntity<ResultModel> res = restTemplate.getForEntity("http://" + SERVICE_A_NAME + "/sa/v2/getAdmin", ResultModel.class);
+        ResponseEntity<User> responseEntity = restTemplate.getForEntity("http://" + SERVICE_A_NAME + "/sa/v2/getAdmin", User.class);
 
-        return res;
+        return responseEntity.getBody();
     }
 
     /**

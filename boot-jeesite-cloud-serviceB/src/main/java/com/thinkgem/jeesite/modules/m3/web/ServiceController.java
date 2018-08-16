@@ -27,8 +27,9 @@ public class ServiceController extends BaseController {
     @ApiOperation(value = "获取用户", notes = "数据返回类型json|xml?", produces = "application/json,application/xml")
     public ResponseEntity<ResultModel> test() {
 
+        User user = userService.getUser();
+        return new ResponseEntity<>(ResultModel.ok(user), HttpStatus.OK);
 
-        return userService.getUser();
     }
 
 }
