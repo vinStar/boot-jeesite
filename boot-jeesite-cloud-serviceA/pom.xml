@@ -9,9 +9,28 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.0</version>
-    <artifactId>boot-jeesite-common-config</artifactId>
+    <artifactId>boot-jeesite-cloud-serviceA</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.thinkgem.jeesite</groupId>
+            <artifactId>boot-jeesite-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!--监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+         <!--服务注册所需环境-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+    </dependencies>
+
 
     <build>
         <plugins>
@@ -34,16 +53,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<fork>true</fork>-->
-            <!--<excludeArtifactIds>-->
-            <!--slf4j-log4j12-->
-            <!--</excludeArtifactIds>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+            <fork>true</fork>
+            <excludeArtifactIds>
+            slf4j-log4j12
+            </excludeArtifactIds>
+            </configuration>
+            </plugin>
         </plugins>
     </build>
 

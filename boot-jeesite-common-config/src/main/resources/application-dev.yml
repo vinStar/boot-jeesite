@@ -1,5 +1,5 @@
 server:
-  port: 8091
+  port: 8097
   context-path: / # 可以加访问后缀如项目名 /boot
 management: #健康监控
   security:
@@ -7,10 +7,11 @@ management: #健康监控
 #  port: 1101 #管理端口调整成1101
   context-path: /admin #actuator的访问路径
 
+
 #log
 logging:
   level:
-    root: error
+    root: error #info 级别输出 tomcat port
     com.thinkgem.jeesite: debug
     org.apache.shiro.cache.ehcache.EhCacheManager: warn
 #spring mvc datasource redis
@@ -164,5 +165,30 @@ qiniu:
   secretKey: aR7uPVkuS2caKqS7kP-mwdCLXXXXXXX
   bucket: XXXX-img0
   bucket-url: http://img.XXXX.cn/
+
+# eureka  - client
+#spring:
+#  cloud:
+#    #config:
+#    #uri: http://127.0.0.1:${config.port:8888}
+#    #name: service-A
+#  application:
+#    name: service-A
+eureka:
+  client:
+    service-url:
+      default-zone: http\://master\:8761/eureka/,\
+                  http\://slave1\:8762/eureka/,\
+                  http\://slave2\:8763/eureka/
+  instance:
+    hostname: service-a
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 30
+
+
+#management: #健康监控
+#  security:
+#    enabled: false #关掉安全认证
+
 
 

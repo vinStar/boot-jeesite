@@ -9,9 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.0</version>
-    <artifactId>boot-jeesite-common-config</artifactId>
+    <artifactId>boot-jeesite-cloud-eureka</artifactId>
+    <description>注册中心 eureka</description>
     <packaging>jar</packaging>
+    <name>boot jeesite eureka</name>
+
+    <dependencies>
+
+        <!--增加eureka-server的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--用于测试的，本例可省略-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -34,17 +54,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<fork>true</fork>-->
-            <!--<excludeArtifactIds>-->
-            <!--slf4j-log4j12-->
-            <!--</excludeArtifactIds>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <excludeArtifactIds>
+                        slf4j-log4j12
+                    </excludeArtifactIds>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
