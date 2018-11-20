@@ -32,7 +32,7 @@
  
 ## 2018-08-16
 
-1. 服务调用 SA->SB , resttemplate getForEntity 
+1. 服务调用 SB->SA , resttemplate getForEntity 
 2. root 日志级别，当前为 error，info 输出 tomcat port  
 
  
